@@ -28,9 +28,51 @@
 import http = require("http");
 import request = require("request");
 import requestDebug = require("request-debug");
+import { Readable } from "stream";
 import { Configuration } from "./configuration";
 import { ObjectSerializer } from "./objectSerializer";
 import { Encryptor } from "../api";
+
+/**
+ * Read a Readable stream fully into a Buffer.
+ */
+async function readStream(stream: Readable): Promise<Buffer> {
+    return new Promise<Buffer>((resolve, reject) => {
+        const chunks: Buffer[] = [];
+        stream.on("data", (chunk) => chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)));
+        stream.on("end", () => resolve(Buffer.concat(chunks)));
+        stream.on("error", reject);
+    });
+}
+
+/**
+ * Buffer any Readable streams contained in formData entries.
+ *
+ * The underlying `request` library cannot compute a correct Content-Length
+ * for a multipart payload whose part value is a Readable stream — it serializes
+ * an empty body, which causes the Aspose API to return HTTP 400 with
+ * "An error occurred while parse the multipart content. Unexpected end of Stream".
+ *
+ * Buffering the stream into a Buffer first lets `form-data` and `request`
+ * compute the correct Content-Length and emit the full payload.
+ *
+ * See https://github.com/aspose-words-cloud/Aspose.Words-Cloud-SDK-for-Node.js/issues/16
+ */
+export async function bufferFormDataStreams(formData: any): Promise<void> {
+    if (!formData) {
+        return;
+    }
+
+    for (const key of Object.keys(formData)) {
+        const entry = formData[key];
+        const entries = Array.isArray(entry) ? entry : [entry];
+        for (const item of entries) {
+            if (item && item.value instanceof Readable) {
+                item.value = await readStream(item.value);
+            }
+        }
+    }
+}
 
 /**
  * Get boundary for IncomingHttpHeaders
@@ -153,6 +195,8 @@ async function invokeApiMethodInternal(requestOptions: request.OptionsWithUri, c
     requestOptions.encoding = null;
 
 	requestOptions.uri = encodeURI(requestOptions.uri.toString());
+
+    await bufferFormDataStreams(requestOptions.formData);
 
     const auth = confguration.authentication;
     if (!notApplyAuthToRequest) {
