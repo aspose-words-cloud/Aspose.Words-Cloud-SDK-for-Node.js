@@ -27,10 +27,9 @@
 
 import "mocha";
 import { WordsApi, UploadFileRequest, SaveAsRequest, PdfSaveOptionsData } from "../src/api";
-import { createReadStream } from "fs";
 import * as BaseTest from "./baseTest";
 import { fail } from "assert";
-import fs = require('fs');
+import * as fs from "fs";
 
 describe("Readme code tests", () => {
     it("Readme code should run without errors'", () => {
@@ -51,7 +50,7 @@ describe("Readme code tests", () => {
         // upload file to the Aspose cloud
         const uploadRequest = new UploadFileRequest();
         uploadRequest.path = "uploaded.docx";
-        uploadRequest.fileContent = createReadStream(localPath);
+        uploadRequest.fileContent = fs.createReadStream(localPath);
 
         wordsApi.uploadFile(uploadRequest)
             .then((_uploadResult) => {
