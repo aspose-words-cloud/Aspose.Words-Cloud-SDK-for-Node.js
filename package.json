@@ -1,6 +1,6 @@
 {
   "name": "asposewordscloud",
-  "version": "26.5.0",
+  "version": "26.3.0",
   "description": "Aspose.Words Cloud SDK for Node.js",
   "homepage": "https://products.aspose.cloud/words/cloud",
   "author": {
@@ -57,5 +57,8 @@
     "sinon": "^9.0.2",
     "ts-node": "^8.8.2",
     "typescript": "^4.8.4"
+  }, 
+  "overrides": {
+    "yargs": "^18.0.0"
   }
 }
