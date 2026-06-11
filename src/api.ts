@@ -25,11 +25,11 @@
  * --------------------------------------------------------------------------------
  */
 
-import http = require("http");
-import request = require("request");
+import * as http  from "http";
+import * as  request from "request";
 import { Readable } from 'stream';
-import FormData = require("form-data");
-import RSA = require('node-rsa');
+import * as FormData  from "form-data";
+import * as RSA  from 'node-rsa';
 
 import { Configuration } from "./internal/configuration";
 import { invokeApiMethod, getBoundary, parseBatchParts } from "./internal/requestHelper";
