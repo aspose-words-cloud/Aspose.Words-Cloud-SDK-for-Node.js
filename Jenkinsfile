@@ -69,19 +69,23 @@ def runtests(dockerImageVersion)
                             }
                         }
                     
-                        stage('tests'){   
-                            try {
-                                sh "npm run test-jenkins"
-                            } finally {
-                                junit 'reports/**.xml'
+                        stage('tests'){
+                            withEnv(['NODE_OPTIONS=--no-experimental-strip-types']) {                        
+                                try {
+                                    sh "npm run test-jenkins"
+                                } finally {
+                                    junit 'reports/**.xml'
+                                }
                             }
                         }
                     
                         stage('bdd-tests'){
-                            try {
-                                sh "npm run cucumber"
-                            } finally {
-                                cucumber 'reports/**.json'
+                            withEnv(['NODE_OPTIONS=--no-experimental-strip-types']) {
+                                try {
+                                    sh "npm run cucumber"
+                                } finally {
+                                    cucumber 'reports/**.json'
+                                }
                             }
                         }
                 } 
@@ -95,5 +99,5 @@ def runtests(dockerImageVersion)
 }
 
 node('words-linux') {        
-    runtests("latest")   
+    runtests("22-alpine")   
 }

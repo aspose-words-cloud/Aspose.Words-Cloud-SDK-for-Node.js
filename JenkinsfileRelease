@@ -56,20 +56,24 @@ node('words-linux') {
 				
 					stage('package tests'){
                         if (!ignorePackageTesting) {
-                            try {
-                                sh "npm run test-jenkins"
-                            } finally {
-                                junit 'reports/**.xml'
+                            withEnv(['NODE_OPTIONS=--no-experimental-strip-types']) {                        
+                                try {
+                                    sh "npm run test-jenkins"
+                                } finally {
+                                    junit 'reports/**.xml'
+                                }
                             }
                         }
 					}
 				
 					stage('bdd package tests'){
                         if (!ignorePackageTesting) {
-                            try {
-                                sh "npm run cucumber"
-                            } finally {
-                                cucumber 'reports/**.json'
+                            withEnv(['NODE_OPTIONS=--no-experimental-strip-types']) {
+                                try {
+                                    sh "npm run cucumber"
+                                } finally {
+                                    cucumber 'reports/**.json'
+                                }
                             }
                         }
 					}
