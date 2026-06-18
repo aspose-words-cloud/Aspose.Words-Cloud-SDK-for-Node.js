@@ -70,7 +70,7 @@ def runtests(dockerImageVersion)
                         }
                     
                         stage('tests'){
-                            withEnv(['NODE_OPTIONS=--no-experimental-strip-types']) {                        
+                            withEnv(['NODE_OPTIONS=--no-experimental-strip-types --NODE_TLS_REJECT_UNAUTHORIZED=0']) {                        
                                 try {
                                     sh "npm run test-jenkins"
                                 } finally {
