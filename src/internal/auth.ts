@@ -25,7 +25,7 @@
  * --------------------------------------------------------------------------------
  */
 
-import request = require("request");
+import * as request from "request";
 import { Configuration } from "./configuration";
 import { invokeApiMethod } from "./requestHelper";
 

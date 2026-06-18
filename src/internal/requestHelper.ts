@@ -25,9 +25,9 @@
  * --------------------------------------------------------------------------------
  */
 
-import http = require("http");
-import request = require("request");
-import requestDebug = require("request-debug");
+import * as http from "http";
+import * as request from "request";
+import * as requestDebug from "request-debug";
 import { Configuration } from "./configuration";
 import { ObjectSerializer } from "./objectSerializer";
 import { Encryptor } from "../api";
