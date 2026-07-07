@@ -58,9 +58,9 @@ export class Configuration {
     public debugMode: boolean;
 
     /**
-     * Timeout in seconds. Default value is 100 seconds.
+     * Timeout in seconds. Default value is 300 seconds.
      */
-    public timeout: number = 100;
+    public timeout: number = 300;
 
     /**
      * RSA public key modulus as base64 string. Optional.
