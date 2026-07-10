@@ -99,5 +99,5 @@ def runtests(dockerImageVersion)
 }
 
 node('words-linux') {        
-    runtests("22-alpine")   
+    runtests("24-alpine")   
 }

@@ -25,9 +25,9 @@
  * --------------------------------------------------------------------------------
  */
 
-import http = require("http");
-import request = require("request");
-import requestDebug = require("request-debug");
+import * as http from "http";
+import * as request from "request";
+import * as requestDebug from "request-debug";
 import { Configuration } from "./configuration";
 import { ObjectSerializer } from "./objectSerializer";
 import { Encryptor } from "../api";
@@ -149,7 +149,7 @@ async function invokeApiMethodInternal(requestOptions: request.OptionsWithUri, c
     requestOptions.timeout = 1000 * confguration.timeout;
 
     requestOptions.headers["x-aspose-client"] = "nodejs sdk";
-    requestOptions.headers["x-aspose-client-version"] = "26.6";
+    requestOptions.headers["x-aspose-client-version"] = "26.7";
     requestOptions.encoding = null;
 
 	requestOptions.uri = encodeURI(requestOptions.uri.toString());
