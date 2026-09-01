@@ -51,6 +51,11 @@ export class XpsSaveOptionsData extends FixedPageSaveOptionsData {
             type: "number",
         },
         {
+            name: "compressionLevel",
+            baseName: "CompressionLevel",
+            type: "XpsSaveOptionsData.CompressionLevelEnum",
+        },
+        {
             name: "digitalSignatureDetails",
             baseName: "DigitalSignatureDetails",
             type: "DigitalSignatureDetails",
@@ -83,6 +88,12 @@ export class XpsSaveOptionsData extends FixedPageSaveOptionsData {
      * Gets or sets the level in the XPS document outline at which to display Word bookmarks.
      */
     public bookmarksOutlineLevel: number;
+
+    /**
+     * Gets or sets a compression level used to save document.
+     * The default value is Normal.
+     */
+    public compressionLevel: XpsSaveOptionsData.CompressionLevelEnum;
 
     /**
      * Gets or sets the details for signing the output document.
@@ -128,4 +139,19 @@ export class XpsSaveOptionsData extends FixedPageSaveOptionsData {
 
     }
 }
+
+/**
+ * Enums for XpsSaveOptionsData
+ */
+// tslint:disable:quotemark
+// tslint:disable-next-line:no-namespace
+export namespace XpsSaveOptionsData {
+    export enum CompressionLevelEnum {
+        Normal = 'Normal' as any,
+        Maximum = 'Maximum' as any,
+        Fast = 'Fast' as any,
+        SuperFast = 'SuperFast' as any
+    }
+}
+// tslint:enable:quotemark
 
