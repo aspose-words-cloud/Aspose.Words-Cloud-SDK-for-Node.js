@@ -19,6 +19,7 @@ Feel free to explore the [Developer's Guide](https://docs.aspose.cloud/display/w
 ## Enhancements in Version 26.9
 
 - Added 'CompressionLevel' property for XpsSaveOptionsData class.
+- Added 'GenerateFormFieldScripts' property for PdfSaveOptionsData class.
 
 
 ## Enhancements in Version 26.6
