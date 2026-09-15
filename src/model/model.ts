@@ -761,6 +761,7 @@ const enumsMap = {
     "TiffSaveOptionsData.TiffCompressionEnum": importedTiffSaveOptionsData.TiffSaveOptionsData.TiffCompressionEnum,
     "TxtSaveOptionsBaseData.ExportHeadersFootersModeEnum": importedTxtSaveOptionsBaseData.TxtSaveOptionsBaseData.ExportHeadersFootersModeEnum,
     "WatermarkDataText.LayoutEnum": importedWatermarkDataText.WatermarkDataText.LayoutEnum,
+    "XpsSaveOptionsData.CompressionLevelEnum": importedXpsSaveOptionsData.XpsSaveOptionsData.CompressionLevelEnum,
 
 };
 
