@@ -34,6 +34,7 @@ import { Configuration } from "../internal/configuration";
 import { addQueryParameterToUrl, getBoundary, parseFilesCollection, findMultipartElement, parseMultipart } from "../internal/requestHelper";
 import { ObjectSerializer } from "../internal/objectSerializer";
 import { Encryptor } from '../api';
+import * as importedAdvancedCompareOptions from './advancedCompareOptions';
 import * as importedApiError from './apiError';
 import * as importedAvailableFontsResponse from './availableFontsResponse';
 import * as importedAzw3SaveOptionsData from './azw3SaveOptionsData';
@@ -330,6 +331,7 @@ import * as importedXmlDataLoadOptions from './xmlDataLoadOptions';
 import * as importedXpsSaveOptionsData from './xpsSaveOptionsData';
 
 export { AttributeInfo } from '../internal/attributeInfo';
+export * from './advancedCompareOptions';
 export * from './apiError';
 export * from './availableFontsResponse';
 export * from './azw3SaveOptionsData';
@@ -767,6 +769,7 @@ const enumsMap = {
 
 const typeMap = {
     FileReference: importedFileReference.FileReference,
+    AdvancedCompareOptions: importedAdvancedCompareOptions.AdvancedCompareOptions,
     ApiError: importedApiError.ApiError,
     AvailableFontsResponse: importedAvailableFontsResponse.AvailableFontsResponse,
     Azw3SaveOptionsData: importedAzw3SaveOptionsData.Azw3SaveOptionsData,

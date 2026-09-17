@@ -27,10 +27,12 @@
 
 import { AttributeInfo } from '../internal/attributeInfo';
 import { ModelInterface } from './modelInterface';
+import { AdvancedCompareOptions } from './advancedCompareOptions';
 import { CompareOptions } from './compareOptions';
 import { FileReference } from './fileReference';
 
 export const importsMapCompareData = {
+    AdvancedCompareOptions,
     CompareOptions,
     FileReference,
 };
@@ -43,6 +45,11 @@ export class CompareData implements ModelInterface {
      * Attribute type map
      */
     public static attributeTypeMap: Array<AttributeInfo> = [
+        {
+            name: "advancedOptions",
+            baseName: "AdvancedOptions",
+            type: "AdvancedCompareOptions",
+        },
         {
             name: "author",
             baseName: "Author",
@@ -81,6 +88,11 @@ export class CompareData implements ModelInterface {
     public static getAttributeTypeMap() {
         return CompareData.attributeTypeMap;
     }
+
+    /**
+     * Gets or sets advanced compare options that might help to produce more precise comparison output.
+     */
+    public advancedOptions: AdvancedCompareOptions;
 
     /**
      * Gets or sets the initials of the author to use for revisions.
@@ -134,6 +146,11 @@ export class CompareData implements ModelInterface {
         {
             throw new Error('Property FileReference in CompareData is required.');
         }
+
+        this.advancedOptions?.validate();
+
+
+
 
         this.compareOptions?.validate();
 
