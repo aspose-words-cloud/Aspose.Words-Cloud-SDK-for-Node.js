@@ -119,7 +119,8 @@ export namespace PdfDigitalSignatureDetailsData {
         Sha256 = 'Sha256' as any,
         Sha384 = 'Sha384' as any,
         Sha512 = 'Sha512' as any,
-        RipeMD160 = 'RipeMD160' as any
+        RipeMD160 = 'RipeMD160' as any,
+        Auto = 'Auto' as any
     }
 }
 // tslint:enable:quotemark
