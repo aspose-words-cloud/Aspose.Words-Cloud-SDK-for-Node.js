@@ -3998,6 +3998,44 @@ export class WordsApi implements Encryptor {
     }
 
     /**
+     * Inserts a new DrawingObject to the document node. The image is passed by reference:
+     * a storage path in the document folder or its subfolders, an HTTP(S) URL, or a request part.
+     * @param requestObj contains request parameters
+     */
+    public async insertDrawingObjectByReference(requestObj: model.InsertDrawingObjectByReferenceRequest): Promise< model.WordsIncomingMessage< model.DrawingObjectResponse > > {
+        if (requestObj === null || requestObj === undefined) {
+            throw new Error('Required parameter "request" was null or undefined when calling insertDrawingObjectByReference.');
+        }
+
+        const requestOptions = await requestObj.createRequestOptions(this.configuration, this); 
+
+        const response = await invokeApiMethod(requestOptions, this.configuration);
+        const result = new model.WordsIncomingMessage< model.DrawingObjectResponse >();    
+        result.response = response;
+        result.body = requestObj.createResponse(response.body, response.headers);
+        return Promise.resolve(result);
+    }
+
+    /**
+     * Inserts a new DrawingObject to the document node. The image is passed by reference:
+     * a storage path in the document folder or its subfolders, an HTTP(S) URL, or a request part.
+     * @param requestObj contains request parameters
+     */
+    public async insertDrawingObjectByReferenceOnline(requestObj: model.InsertDrawingObjectByReferenceOnlineRequest): Promise< model.WordsIncomingMessage< model.InsertDrawingObjectByReferenceOnlineResponse > > {
+        if (requestObj === null || requestObj === undefined) {
+            throw new Error('Required parameter "request" was null or undefined when calling insertDrawingObjectByReferenceOnline.');
+        }
+
+        const requestOptions = await requestObj.createRequestOptions(this.configuration, this); 
+
+        const response = await invokeApiMethod(requestOptions, this.configuration);
+        const result = new model.WordsIncomingMessage< model.InsertDrawingObjectByReferenceOnlineResponse >();
+        result.response = response;
+        result.body = requestObj.createResponse(response.body, response.headers);
+        return Promise.resolve(result);
+    }
+
+    /**
      * Inserts a new DrawingObject to the document node.
      * @param requestObj contains request parameters
      */

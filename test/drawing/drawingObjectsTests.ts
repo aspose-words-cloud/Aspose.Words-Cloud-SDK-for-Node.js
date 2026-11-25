@@ -552,6 +552,88 @@ describe("drawingObjects", () => {
        });
     });
 
+    // Test for adding drawing object with the image from the storage.
+    describe("insertDrawingObjectByReference test", () => {
+        it("should return response with code 200", () => {
+            const wordsApi = BaseTest.initializeWordsApi();
+            const remoteFileName = "TestInsertDrawingObjectByReference.docx";
+            const remoteImagePath = remoteDataFolder + "/TestInsertDrawingObjectByReference.png";
+
+            return wordsApi.uploadFileToStorage(
+                remoteDataFolder + "/" + remoteFileName,
+                BaseTest.localBaseTestDataFolder + localFile
+            ).then((result0) => {
+                expect(result0.response.statusMessage).to.equal("OK");
+                return wordsApi.uploadFileToStorage(
+                    remoteImagePath,
+                    BaseTest.localBaseTestDataFolder + "Common/aspose-cloud.png"
+                ).then((result1) => {
+                    expect(result1.response.statusMessage).to.equal("OK");
+                    const requestDrawingObjectImageReference = model.FileReference.fromRemoteFilePath(remoteImagePath);
+                    const requestDrawingObject = new model.DrawingObjectInsertData({
+                        height: 0,
+                        left: 0,
+                        top: 0,
+                        width: 0,
+                        relativeHorizontalPosition: model.DrawingObjectInsertData.RelativeHorizontalPositionEnum.Margin,
+                        relativeVerticalPosition: model.DrawingObjectInsertData.RelativeVerticalPositionEnum.Margin,
+                        wrapType: model.DrawingObjectInsertData.WrapTypeEnum.Inline,
+                        imageReference: requestDrawingObjectImageReference
+                    })
+                    const request = new model.InsertDrawingObjectByReferenceRequest({
+                        name: remoteFileName,
+                        drawingObject: requestDrawingObject,
+                        nodePath: "",
+                        folder: remoteDataFolder
+                    });
+
+                    // Act
+                    return wordsApi.insertDrawingObjectByReference(request)
+                    .then((resultApi) => {
+                        // Assert
+                        expect(resultApi.response.statusCode).to.equal(200);
+                    });
+
+                });
+
+            });
+
+       });
+    });
+
+    // Test for adding drawing object online with the image from the request.
+    describe("insertDrawingObjectByReferenceOnline test", () => {
+        it("should return response with code 200", () => {
+            const wordsApi = BaseTest.initializeWordsApi();
+            const requestDocument = fs.createReadStream(BaseTest.localBaseTestDataFolder + localFile);
+            const requestDrawingObjectImageReferenceStream = fs.createReadStream(BaseTest.localBaseTestDataFolder + "Common/aspose-cloud.png");
+            const requestDrawingObjectImageReference = model.FileReference.fromLocalFileContent(requestDrawingObjectImageReferenceStream);
+            const requestDrawingObject = new model.DrawingObjectInsertData({
+                height: 0,
+                left: 0,
+                top: 0,
+                width: 0,
+                relativeHorizontalPosition: model.DrawingObjectInsertData.RelativeHorizontalPositionEnum.Margin,
+                relativeVerticalPosition: model.DrawingObjectInsertData.RelativeVerticalPositionEnum.Margin,
+                wrapType: model.DrawingObjectInsertData.WrapTypeEnum.Inline,
+                imageReference: requestDrawingObjectImageReference
+            })
+            const request = new model.InsertDrawingObjectByReferenceOnlineRequest({
+                document: requestDocument,
+                drawingObject: requestDrawingObject,
+                nodePath: ""
+            });
+
+            // Act
+            return wordsApi.insertDrawingObjectByReferenceOnline(request)
+            .then((resultApi) => {
+                // Assert
+                expect(resultApi.response.statusCode).to.equal(200);
+            });
+
+       });
+    });
+
     // Test for deleting drawing object.
     describe("deleteDrawingObject test", () => {
         it("should return response with code 200", () => {

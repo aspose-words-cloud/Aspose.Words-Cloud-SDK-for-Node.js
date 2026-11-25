@@ -16,6 +16,11 @@ Feel free to explore the [Developer's Guide](https://docs.aspose.cloud/display/w
 - Add & remove watermarks and protection.
 - Read & write access to Document Object Model.
 
+## Enhancements in Version 26.12
+
+- Added 'InsertDrawingObjectByReference' method to insert a drawing object with the image passed as 'FileReference': a storage path in the document folder or its subfolders, a public HTTP(S) URL, or a request part.
+
+
 ## Enhancements in Version 26.10
 
 - Added 'AdvancedOptions' property for CompareData class.
